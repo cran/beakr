@@ -9,7 +9,7 @@ listen(
   host = "127.0.0.1",
   port = 25118,
   daemon = FALSE,
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -25,7 +25,8 @@ is a port opened on 25118.}
 background.}
 
 \item{verbose}{Logical specifying whether to print out details of the
-\code{Beakr} instance now running.}
+\code{Beakr} instance now running. This should only be used when running
+a beaker app interactively, not in production.}
 }
 \value{
 A \code{Beakr} instance with an active server.
@@ -52,13 +53,19 @@ The default port number 25118 was generated using:
 }
 }
 \examples{
-# Run in the background
+library(beakr)
+
+# Create an new Beakr instance
 beakr <- newBeakr()
+
+# beakr pipeline
 beakr \%>\%
+
   httpGET("/", function(req, res, err) {
     return("Successful GET request!\n")
   }) \%>\%
-  listen(daemon = TRUE)
+
+  listen(daemon = TRUE)     # run in the background
 
 # Stop the server
 stopServer(beakr)

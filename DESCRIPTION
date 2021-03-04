@@ -1,7 +1,7 @@
 Package: beakr
 Type: Package
 Title: A Minimalist Web Framework for R
-Version: 0.3.1
+Version: 0.4.2
 Authors@R: c(
     person("Hans", "Martin", email="hans@mazamascience.com", role=c("aut")),
     person("Jonathan", "Callahan", email="jonathan.s.callahan@gmail.com", role=c("aut","cre"))
@@ -23,8 +23,8 @@ Imports: R6, base64enc, httpuv, jsonlite, magrittr, mime, stringr,
         webutils
 Suggests: knitr, testthat, rmarkdown
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-01-31 00:14:39 UTC; jonathan
+Packaged: 2021-03-04 22:18:18 UTC; jonathancallahan
 Repository: CRAN
-Date/Publication: 2020-02-10 16:00:05 UTC
+Date/Publication: 2021-03-04 22:30:02 UTC

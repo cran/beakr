@@ -1,8 +1,8 @@
 [![sm-beakr.png](https://i.postimg.cc/7YBB0Hnp/sm-beakr.png)](https://postimg.cc/bstHjjMT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/AirSensor)](https://cran.r-project.org/package=beakr)
-[![Downloads](http://cranlogs.r-pkg.org/badges/AirSensor)](https://cran.r-project.org/package=beakr)
-[![Build Status](https://travis-ci.org/MazamaScience/AirSensor.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
+[![Downloads](http://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
+[![Build Status](https://travis-ci.org/MazamaScience/beakr.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
 
 
 ## A Minimalist Web Framework for R
@@ -17,21 +17,31 @@ package APIs — without obscuring R's data processing capability and ease of us
 ```
 library(beakr)
 
+# Create a new beakr server
 newBeakr() %>% 
+
+  # Respond to GET requests at the "/hi" route
   httpGET(path = "/hi", function(req, res, err) {
     print("Hello, World!")
   }) %>% 
+  
+  # Respond to GET requests at the "/bye" route
   httpGET(path = "/bye", function(req, res, err) {
     print("Farewell, my friends.")
   }) %>% 
+  
+  # Handle any errors with a JSON response
+  handleErrors() %>%
+  
+  # Start the server on port 25118
   listen(host = "127.0.0.1", port = 25118) 
 ```
 
 A new web service is now available on the local host that responds to two
 URLs:
 
-* http://127.0.0.1.25118/hi
-* http://127.0.0.1.25118/bye
+* http://127.0.0.1:25118/hi
+* http://127.0.0.1:25118/bye
 
 ## Overview
 
@@ -88,7 +98,7 @@ species of iris associated with incoming data. The _Beakr_ instance
 exposes this API and, when given JSON input with the required arguments, 
 identifies and returns the species.
 
-_Note_ that `httpPOST` attaches the URL path `/predict-specis` only to http POST
+_Note_ that `httpPOST` attaches the URL path `/predict-species` only to http POST
 requests. Pointing a browser at this URL path will issue a File Not found error
 because the browser is issuing an http GET request. Like other frameworks,
 **beakr** allows for method-specific URL routing.

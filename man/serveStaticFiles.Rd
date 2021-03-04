@@ -8,13 +8,14 @@ serveStaticFiles(
   beakr = NULL,
   urlPath = NULL,
   rootPath = getwd(),
-  rawTypesPattern = "image|json|octet|pdf|video"
+  rawTypesPattern = "text|image|json|octet|pdf|video",
+  verbose = FALSE
 )
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance or \code{NULL}.}
 
-\item{urlPath}{String representing the URL directory undnerneath which static
+\item{urlPath}{String representing the URL directory underneath which static
 file paths will appear.}
 
 \item{rootPath}{String representing the absolute path used as the root
@@ -23,6 +24,8 @@ in which the script is running.}
 
 \item{rawTypesPattern}{String pattern identifying mime types to be returned
 as raw bytes.}
+
+\item{verbose}{Boolean to show a verbose static file information.}
 }
 \value{
 A \code{Beakr} instance with added middleware.
@@ -42,22 +45,52 @@ host machine directory specified with \code{rootPath}. The directory
 structure underneath \code{rootPath} will be mapped onto URLs underneath
 \code{urlPath}. This helps when deploying web services at preordained URLs.
 
-For example, specifying:
-
-\preformatted{
-beakr %>%
-  ...
-  serverStaticFiles("/data-service/A", "/data/project_A/public")
-  ...
-  listen()
+The example below presents files underneath host machine directory
+\code{hostDir/} to be accessed at URLS under \code{test/}.
 }
-
-will allow a file found on the host machine at:
-\preformatted{
-  /data/project_A/public/2019/averages.csv"
+\note{
+If you run the example in the console, be sure to
+\code{stopServer(bekar)} when you are done.
 }
-to be downloaded from:
-\preformatted{
-  http://<ip-address>:<port>/data-service/A/2019/averages.csv"
+\examples{
+\donttest{
+library(beakr)
+
+# Create a .txt file in temp directory
+hostDir <- tempdir()
+file <- paste0(hostDir, "/my_file.txt")
+cat("I am a text file.", file = file)
+
+# Create an new beakr instance
+beakr <- newBeakr()
+
+# beakr pipeline
+beakr \%>\%
+
+  # Respond to GET requests at the "/hi" route
+  httpGET(path = "/hi", function(req, res, err) {
+    print("Hello, World!")
+  }) \%>\%
+
+  # Respond to GET requests at the "/bye" route
+  httpGET(path = "/bye", function(req, res, err) {
+    print("Farewell, my friends.")
+  }) \%>\%
+
+ # Host the directory of static files
+ serveStaticFiles("/test", hostDir, verbose = TRUE) \%>\%
+
+ # Start the server on port 25118
+ listen(host = "127.0.0.1", port = 25118, daemon = TRUE)
+
+# ------------------------------------------------------------
+# POINT YOUR BROWSER AT:
+# * http://127.0.0.1:25118/test/my_file.txt
+#
+# THEN, STOP THE SERVER WITH stopServer(beakr)
+# ------------------------------------------------------------
+
+# Stop the beakr instance server
+stopServer(beakr)
 }
 }

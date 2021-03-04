@@ -17,24 +17,32 @@
 #'
 #' @examples
 #' \donttest{
-#' # Create an new Beakr instance
+#' library(beakr)
+#'
+#' # Create an new beakr instance
 #' beakr <- newBeakr()
 #'
-#' # Create a pipeline of hanldlers
+#' # beakr pipeline of hanldlers
 #' beakr %>%
+#'
 #'   httpGET(path = "/route_A", function(res, req, err) {
 #'     print("This is route 'A'.")
 #'   }) %>%
+#'
 #'   httpGET(path = "/route_B", function(res, req, err) {
 #'     print("This is route 'B'.")
 #'   }) %>%
+#'
 #'   handleErrors() %>%
+#'
 #'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # POINT YOUR BROWSER AT:
 #' # * http://127.0.0.1:25118/route_A
 #' # * http://127.0.0.1:25118/route_B
+#' #
+#' # THEN, STOP THE SERVER WITH stopServer(beakr)
 #' # ------------------------------------------------------------
 #'
 #' # Stop the beakr instance server
@@ -84,18 +92,25 @@ newBeakr <- function(
 #' @param daemon Logical specifying whether the server should be run in the
 #' background.
 #' @param verbose Logical specifying whether to print out details of the
-#' \code{Beakr} instance now running.
+#' \code{Beakr} instance now running. This should only be used when running
+#' a beaker app interactively, not in production.
 #'
 #' @return A \code{Beakr} instance with an active server.
 #'
 #' @examples
-#' # Run in the background
+#' library(beakr)
+#'
+#' # Create an new Beakr instance
 #' beakr <- newBeakr()
+#'
+#' # beakr pipeline
 #' beakr %>%
+#'
 #'   httpGET("/", function(req, res, err) {
 #'     return("Successful GET request!\n")
 #'   }) %>%
-#'   listen(daemon = TRUE)
+#'
+#'   listen(daemon = TRUE)     # run in the background
 #'
 #' # Stop the server
 #' stopServer(beakr)
@@ -105,7 +120,7 @@ listen <- function(
   host = "127.0.0.1",
   port = 25118,
   daemon = FALSE,
-  verbose = TRUE
+  verbose = FALSE
 ) {
 
   if ( is.null(beakr) )
@@ -142,23 +157,32 @@ listen <- function(
 #'
 #' @examples
 #' \donttest{
+#' library(beakr)
+#'
 #' # Create an new Beakr instance
 #' beakr <- newBeakr()
+#'
 #' # Create simple hello and goodbye function
 #' hello <- function(name) { paste0("Hello, ", name, "!") }
 #' goodbye <- function(text = "Adios") { paste0(text, ", dear friend.") }
 #'
 #' # Create a web service from these functions
 #' beakr %>%
+#'
 #'   httpGET(path = "/hello", decorate(hello)) %>%
+#'
 #'   httpGET(path = "/goodbye", decorate(goodbye)) %>%
+#'
 #'   handleErrors() %>%
+#'
 #'   listen(host = '127.0.0.1', port = 25118, daemon = TRUE)
 #'
 #' # ------------------------------------------------------------
 #' # POINT YOUR BROWSER AT:
 #' # * http://127.0.0.1:25118/hello?name=Honeydew
-#' # * http://127.0.0.1:25118/goodbye
+#' # * http://127.0.0.1:25118/goodbye?text=Sionara
+#' #
+#' # THEN, STOP THE SERVER WITH stopServer(beakr)
 #' # ------------------------------------------------------------
 #'
 #' # Stop the beakr instance server
@@ -223,14 +247,22 @@ decorate <- function(
 #' @return None
 #'
 #' @examples
+#' library(beakr)
+#'
 #' beakr <- newBeakr()
+#'
+#' # beakr pipeline
 #' beakr %>%
+#'
+#'   handleErrors() %>%
+#'
 #'   listen(daemon = TRUE, verbose = TRUE)
+#'
 #' stopServer(beakr, verbose = TRUE)
 
 stopServer <- function(
   beakr = NULL,
-  verbose = TRUE
+  verbose = FALSE
 ) {
 
   if ( is.null(beakr) )
@@ -266,6 +298,8 @@ stopServer <- function(
 #' @return None
 #'
 #' @examples
+#' library(beakr)
+#'
 #' beakr1 <- newBeakr()
 #' beakr2 <- newBeakr()
 #' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)
@@ -294,6 +328,8 @@ NULL
 #' @return None
 #'
 #' @examples
+#' library(beakr)
+#'
 #' beakr1 <- newBeakr()
 #' beakr2 <- newBeakr()
 #' beakr1 %>% listen(daemon = TRUE, port = 1234, verbose = TRUE)

@@ -4,7 +4,7 @@
 \alias{stopServer}
 \title{Stop a beakr instance server}
 \usage{
-stopServer(beakr = NULL, verbose = TRUE)
+stopServer(beakr = NULL, verbose = FALSE)
 }
 \arguments{
 \item{beakr}{\code{Beakr} instance.}
@@ -20,8 +20,16 @@ Stops the server associated with a \code{Beakr} instance,
 closing all open connections and unbinding the port.
 }
 \examples{
+library(beakr)
+
 beakr <- newBeakr()
+
+# beakr pipeline
 beakr \%>\%
+
+  handleErrors() \%>\%
+
   listen(daemon = TRUE, verbose = TRUE)
+
 stopServer(beakr, verbose = TRUE)
 }

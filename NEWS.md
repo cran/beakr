@@ -1,3 +1,20 @@
+# beakr 0.4.2
+
+* URL fix for CRAN submission.
+
+# beakr 0.4.1
+
+* Improved examples in function documentation.
+
+# beakr 0.4.0 
+
+* Added native CORS functionality.
+
+# beakr 0.3.2
+
+* Added a `FUN` parameter to `handleErrors()` so users can define their own 
+function to deal with error responses.
+
 # beakr 0.3.1
 
 * Removed `httpuv_~()` function wrappers in favor of importing the functions 
