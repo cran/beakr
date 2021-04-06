@@ -1,6 +1,6 @@
-f2c556eb1dc5fe96c1932161b3741542 *DESCRIPTION
+a8b43413cec5f5567e930bb2a9311d55 *DESCRIPTION
 0f7276c282cec7af87f143b29b8b398d *NAMESPACE
-d295882f9701562b1c6ebce82d0cca11 *NEWS.md
+6abb7d7c0085b5e5a442ea722678cf8b *NEWS.md
 6a90abcf421fc4eb9ef6e540600c3ca0 *R/Beakr.R
 f05dd0a52bcb863c6bcb0ec712e59e9b *R/Error.R
 89d6594553e57150248dc145d39303db *R/Listener.R
@@ -10,7 +10,7 @@ a0f5d6e69ffd31924506ded01dde788a *R/Middleware.R
 855240ff821d7b47613a7028966ca0f7 *R/Router.R
 f1334eee783cb946aa7e3934719cd010 *R/utils-httpRouters.R
 fdce8d802cb4f6fb8c21fe5daeb9fd64 *R/utils-internal.R
-fb6fc59fdff1b537ed7a1ab278a8bd24 *R/utils-middleware.R
+d6a2ad2755cb85ba990f5481b8135c51 *R/utils-middleware.R
 b1aad4c8bfd469c373b2b00e62682b95 *R/utils.R
 171ec529777f4a0494a29a9f8eaa291e *README.md
 cabe09be259ff9554e1ee4800f633d9e *man/Beakr.Rd
@@ -37,6 +37,6 @@ e1855fddd89bedee0b81baf30d603c44 *man/httpPOST.Rd
 2046d190f58877e2a8329e9f37b2d3e7 *man/listen.Rd
 213f687c9b8bd769834c9466091d7b4c *man/newBeakr.Rd
 f20277324879bf6130938f5a890cd9b8 *man/pipe.Rd
-70d2420e009d2d2784d3ef01077f4efb *man/serveStaticFiles.Rd
+c518113adcf598d83f5f6c58f4ccf863 *man/serveStaticFiles.Rd
 5e3d9c1f880d68a0750d77b7148826a5 *man/stopAllServers.Rd
 12e028ebae470461a6d365f08df00a78 *man/stopServer.Rd
