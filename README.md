@@ -1,9 +1,7 @@
 [![sm-beakr.png](https://i.postimg.cc/7YBB0Hnp/sm-beakr.png)](https://postimg.cc/bstHjjMT)
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
-[![Downloads](http://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
-[![Build Status](https://travis-ci.org/MazamaScience/beakr.svg?branch=master)](https://travis-ci.org/MazamaScience/beakr)
-
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/beakr)](https://cran.r-project.org/package=beakr)
+[![Downloads](https://cranlogs.r-pkg.org/badges/beakr)](https://cran.r-project.org/package=beakr)
 
 ## A Minimalist Web Framework for R
 
@@ -12,9 +10,12 @@ Language. **beakr** offers a robust set of fundamental web application features
 and is intended to simplify the development of web services that reflect R 
 package APIs — without obscuring R's data processing capability and ease of use.
 
+A dedicated Slack channel has been created for announcements, support and to help build a community of 
+practice around this open source package. You may request an invitation to join from jonathan.callahan@dri.com.
+
 ### Hello, world! - The beakr way
 
-```
+```r
 library(beakr)
 
 # Create a new beakr server
@@ -54,10 +55,10 @@ the flexibility of the package are (potentially) up to the task. Keep in mind
 that **beakr** was not designed to be an especially performant web framework and 
 the  _"batteries are certainly not included"_. If you're looking for full 
 featured  web frameworks, there are better tools and languages for that 
-(see [Shiny](https://shiny.rstudio.com), [django](https://www.djangoproject.com), etc.). 
+(see [Shiny](https://shiny.posit.co), [django](https://www.djangoproject.com), etc.). 
 **beakr** is inspired by the minimalist and massively-expandable frameworks 
 offered by [Express.js](https://expressjs.com) and 
-[Flask](https://palletsprojects.com/p/flask/). 
+[Flask](https://palletsprojects.com/p/flask). 
 
 One of the reasons to use **beakr** is that it is incredibly flexible. It allows 
 you to integrate your R code as _Middleware_ in a _Beakr_ instance. Middleware 
@@ -103,7 +104,7 @@ requests. Pointing a browser at this URL path will issue a File Not found error
 because the browser is issuing an http GET request. Like other frameworks,
 **beakr** allows for method-specific URL routing.
 
-```
+```r
 # Import libraries 
 library(beakr)
 library(caret)
@@ -145,7 +146,7 @@ You can interact with this webservice by sending an HTTP POST request to
 string containing sepal length and width (`sl`, `sw`) and petal length and width 
 (`pl`, `pw`). The _Beakr_ instance responds with the predicted species of iris. 
 
-```
+```bash
 $ curl -X POST http://127.0.0.1:25118/predict-species \
   -H 'content-type: application/json' \
   -d '{ "sl": 5.3, "sw": 4, "pl": 1.6, "pw": 0.2 }'
@@ -156,14 +157,14 @@ $ curl -X POST http://127.0.0.1:25118/predict-species \
 ### A state plotting webservice
 
 We can use a built-in convenience function of a **beakr**'s _Response_ object to 
-print and return a _ggplot_ object. Use `help("Response"")` to view other 
+print and return a _ggplot_ object. Use `help("Response")` to view other 
 _Response_ object methods and documentation.  In this example we'll wrap some map 
 generation code and serve it with a _Beakr_ instance.  Instead of decorating an 
 existing package function, we will create a **beakr**-oriented function 
 that uses a response object method to send back raw image bytes. Parameters in 
 the URL request will be converted into arguments to the function.
 
-```
+```r
 library(beakr)
 library(ggplot2)
 
@@ -188,7 +189,7 @@ state_plot <- function(state = NULL, res) {
 # Create and start a default beakr instance
 newBeakr() %>%
   httpGET(path = '/usa', decorate(state_plot)) %>%
-  listen()
+  listen(host = "127.0.0.1", port = 8080)
 ```
 
 View a map of Washington state by visiting: http://127.0.0.1:8080/usa?state=washington.
@@ -199,7 +200,7 @@ Users can create custom functions that will be run when specific URLs are
 accessed using specific HTTP methods. The following example provides a basic
 outline for creating more complex webservices:
 
-```
+```r
 library(beakr)
 library(MazamaCoreUtils)
 
@@ -285,8 +286,10 @@ newBeakr() %>%
 
   # ----- Start Beakr ----------------------------------------------------------
 
-  listen()
+  listen(host = "127.0.0.1", port = 8080)
 ```
+
+View the repeater API by visiting: http://127.0.0.1:8080.
 
 ## Notes
 

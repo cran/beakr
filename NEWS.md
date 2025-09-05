@@ -1,3 +1,7 @@
+# beakr 0.4.4
+
+Documentation tweaks for CRAN.
+
 # beakr 0.4.3
 
 * Fixed default `rawTypesPattern` in `serveStaticFiles()` to remove "text". That
@@ -23,7 +27,7 @@ function to deal with error responses.
 # beakr 0.3.1
 
 * Removed `httpuv_~()` function wrappers in favor of importing the functions 
-directly from *httpuv*.
+directly from **httpuv**.
 * `serveStaticFiles()` now works.
 
 # beakr 0.3.0
